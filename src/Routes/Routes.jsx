@@ -1,9 +1,16 @@
-import React from 'react'
+import { createBrowserRouter } from "react-router";
+import RootLayout from "../Layouts/RootLayout";
+import Home from "../Pages/Home/Home";
 
-const Routes = () => {
-  return (
-    <div>Routes</div>
-  )
-}
-
-export default Routes
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout></RootLayout>,
+    children:[
+        {
+            index:true,
+            element:<Home></Home>
+        }
+    ]
+  },
+]);
