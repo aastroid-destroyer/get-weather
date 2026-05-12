@@ -1,75 +1,76 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { RechartsDevtools } from '@recharts/devtools';
+import React, { useState, useEffect } from 'react';
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    Tooltip,
+    CartesianGrid,
+    ResponsiveContainer,
+} from 'recharts';
 
-// #region Sample data
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+const TemperatureCurveChart = ({ weather }) => {
+    const [isMobile, setIsMobile] = useState(false);
 
-// #endregion
-const SimpleAreaChart = () => {
-  return (
-    <AreaChart
-      style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
-      responsive
-      data={data}
-      margin={{
-        top: 20,
-        right: 0,
-        left: 0,
-        bottom: 0,
-      }}
-      onContextMenu={(_, e) => e.preventDefault()}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" niceTicks="snap125" />
-      <YAxis width="auto" niceTicks="snap125" />
-      <Tooltip />
-      <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-      <RechartsDevtools />
-    </AreaChart>
-  );
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 640);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const data = [
+        { name: 'Min', temp: weather?.main?.temp_min },
+        { name: 'Current', temp: weather?.main?.temp },
+        { name: 'Feels Like', temp: weather?.main?.feels_like },
+        { name: 'Max', temp: weather?.main?.temp_max }
+    ];
+
+    return (
+        <div className="w-full h-[300px] p-4 rounded-xl">
+            <div className="mb-2">
+                <h2 className="text-xl font-bold text-gray-800">{weather?.name}</h2>
+                <p className="text-sm text-gray-500">Temperature Comparison</p>
+            </div>
+
+            <ResponsiveContainer width="100%" height="85%">
+                <LineChart
+                    data={data}
+                    layout={isMobile ? "vertical" : "horizontal"}
+                    margin={isMobile ? { top: 5, right: 30, left: 20, bottom: 5 } : { top: 5, right: 5, left: 0, bottom: 5 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" horizontal={!isMobile} vertical={isMobile} stroke="#eee" />
+
+                    {isMobile ? (
+                        <>
+                            <XAxis type="number" unit="°C" hide />
+                            <YAxis dataKey="name" type="category" width={80} axisLine={false} tickLine={false} />
+                        </>
+                    ) : (
+                        <>
+                            <XAxis dataKey="name" axisLine={false} tickLine={false} />
+                            <YAxis unit="°C" axisLine={false} tickLine={false} />
+                        </>
+                    )}
+
+                    <Tooltip
+                        cursor={{ strokeDasharray: '3 3' }}
+                        formatter={(value) => [`${value}°C`, 'Temp']}
+                    />
+
+                    <Line
+                        type="monotone"
+                        dataKey="temp"
+                        stroke="#f59e0b"
+                        strokeWidth={3}
+                        dot={{ r: 6, fill: '#f59e0b', strokeWidth: 2, stroke: '#fff' }}
+                        activeDot={{ r: 8 }}
+                        animationDuration={1000}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
+    );
 };
 
 export default TemperatureCurveChart;
