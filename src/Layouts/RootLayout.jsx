@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar/Navbar'
 import pImg from '../assets/images.jfif'
 import Home from '../Pages/Home/Home'
 import { IoSearch } from 'react-icons/io5'
+import Drawyer from '../components/Drawyer/Drawyer'
 
 const RootLayout = () => {
     const [city, setCity] = useState("Dhaka");
@@ -31,53 +32,40 @@ const RootLayout = () => {
                         </div>
                     </div>
                     <div className="flex items-center max-w-md mx-auto">
-                        <form onSubmit={handleSubmit} className="relative w-full">
+                        <form onSubmit={handleSubmit} className="relative w-full max-w-xl group">
+
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                                <IoSearch className="w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                            </div>
+
                             <input
-                                name='name'
+                                name="name"
                                 type="text"
-                                className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-none transition-all"
+                                placeholder="Search for something..."
+                                className="block w-full p-4 pl-11 pr-24 text-sm text-slate-700 bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 
+                   placeholder:text-slate-400
+                   focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:outline-none focus:shadow-md
+                   hover:border-slate-300"
                             />
+
                             <button
                                 type="submit"
-                                className="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-600 rounded-r-lg border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors"
+                                className="absolute right-2 top-2 bottom-2 px-6 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl 
+                   shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] 
+                   transition-all duration-200 focus:ring-2 focus:ring-blue-300"
                             >
-                                <IoSearch size={20} />
-                                <span className="sr-only">Search</span>
+                                Search
                             </button>
                         </form>
                     </div>
                 </nav>
                 {/* Page content here */}
                 <div className="p-4">
-                    <Outlet context={{searchTerm, city, setCity }}></Outlet>
+                    <Outlet context={{ searchTerm, city, setCity }}></Outlet>
                 </div>
             </div>
 
-            <div className="drawer-side is-drawer-close:overflow-visible">
-                <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-                    {/* Sidebar content here */}
-                    <ul className="menu w-full grow">
-                        {/* List item */}
-                        <li>
-                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                {/* Home icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                                <span className="is-drawer-close:hidden">Homepage</span>
-                            </button>
-                        </li>
-
-                        {/* List item */}
-                        <li>
-                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
-                                {/* Settings icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-                                <span className="is-drawer-close:hidden">Settings</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <Drawyer searchTerm={searchTerm} />
         </div>
     )
 }
