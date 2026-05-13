@@ -2,14 +2,14 @@ import React from 'react'
 import { useOutletContext } from 'react-router'
 import useWeather from '../../Hooks/useWeather'
 import useCountry from '../../Hooks/useCountry'
-import { FaPeopleGroup } from 'react-icons/fa6'
+import { FaLanguage, FaPeopleGroup } from 'react-icons/fa6'
 import { GrCurrency } from 'react-icons/gr'
 
 const Drawyer = ({ searchTerm }) => {
     const { weather } = useWeather(searchTerm)
     // console.log(weather?.sys.country)
     const { data } = useCountry(weather?.sys.country)
-    console.log(Object.values(data?.currencies || {})?.[0]?.name)
+    console.log(data)
     return (
         <div className="drawer-side is-drawer-close:overflow-visible">
             <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -17,25 +17,32 @@ const Drawyer = ({ searchTerm }) => {
                 {/* Sidebar content here */}
                 <ul className="menu w-full grow">
                     {/* List item */}
-                    <li>
+                    <li className='my-1.5'>
                         <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Country">
                             {/* Home icon */}
-                            <img className="my-1.5 inline-block size-4" src={data?.flags.svg} alt="" />
+                            <img className=" inline-block size-4" src={data?.flags.svg} alt="" />
                             <span className="is-drawer-close:hidden text-blue-600">Bangladesh</span>
                         </button>
                     </li>
-                    <li>
+                    <li className='my-1.5'>
                         <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Population">
                             {/* Home icon */}
                             <FaPeopleGroup />
                             <span className="is-drawer-close:hidden">{data?.population}</span>
                         </button>
                     </li>
-                    <li>
+                    <li className='my-1.5'>
                         <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Currency">
                             {/* Home icon */}
                             <GrCurrency />
-                            <span className="is-drawer-close:hidden">{Object.values(data?.currencies || {})?.[0]?.name}</span>
+                            <span className="is-drawer-close:hidden"><span className='mr-2 text-lg font-bold'>{Object.values(data?.currencies || {})?.[0]?.symbol}</span>{Object.values(data?.currencies || {})?.[0]?.name}</span>
+                        </button>
+                    </li>
+                    <li className='my-1.5'>
+                        <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Language">
+                            {/* Home icon */}
+                            <FaLanguage />
+                            <span className="is-drawer-close:hidden"><span className='mr-2 text-lg font-bold'></span>{Object.values(data?.languages || {})?.[0]}</span>
                         </button>
                     </li>
 
