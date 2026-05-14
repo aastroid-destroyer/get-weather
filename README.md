@@ -39,6 +39,9 @@ A modern, responsive weather dashboard built with React that provides real-time 
 
 ---
 
+##Live URL:
+https://illustrious-palmier-7a57a2.netlify.app/
+
 ## 🌐 APIs Used
 
 - Weather Data:
