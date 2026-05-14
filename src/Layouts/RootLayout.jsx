@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router'
 import Navbar from '../components/Navbar/Navbar'
-import pImg from '../assets/images.jfif'
+import pImg from '../assets/naruto.png'
 import Home from '../Pages/Home/Home'
 import { IoSearch } from 'react-icons/io5'
 import Drawyer from '../components/Drawyer/Drawyer'
@@ -80,7 +80,7 @@ const RootLayout = () => {
                             </p>
 
                             <h1 className="text-sm sm:text-lg lg:text-xl font-medium leading-tight">
-                                Gigga Nigga
+                                Abrar
                             </h1>
                         </div>
                     </div>
