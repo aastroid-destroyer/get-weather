@@ -1,12 +1,58 @@
-# React + Vite
+# 🌦️ GetWeather
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive weather dashboard built with React that provides real-time weather updates, country information, and visually rich UI components.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+👉 [Add your live URL here]
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📌 Features
+
+- 🌍 Search weather by city name
+- 🌡️ Real-time weather data
+- 🏳️ Country details integration
+- 📊 Weather data visualization (charts)
+- 🎨 Smooth UI animations with Framer Motion
+- 📱 Fully responsive (mobile-first design)
+- ⚡ Fast and modern React architecture
+
+---
+
+## 🛠️ Tech Stack
+
+- React 19
+- React Router
+- Tailwind CSS
+- Framer Motion
+- Recharts
+- Axios
+- Lucide Icons
+- React Icons
+- Styled Components
+- Vite + Tailwind Vite Plugin
+- DaisyUI
+
+
+---
+
+## 🌐 APIs Used
+
+- Weather Data:
+  - "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={YOUR_FREE_KEY}&units=metric"
+
+- Country Information:
+  - "https://restcountries.com/v3.1/name/{country_name}?fields=name,flag,capital,population,currencies,languages (no key needed)"
+
+---
+
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/aastroid-destroyer/get-weather.git
+cd get-weather
