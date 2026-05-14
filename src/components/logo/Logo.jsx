@@ -45,7 +45,7 @@ const GetWeatherLogo = ({
     const current = textSizes[textSize];
 
     return (
-        <Link
+        <Link to={'/'}
             className={`
         inline-flex items-center
         ${current.container}

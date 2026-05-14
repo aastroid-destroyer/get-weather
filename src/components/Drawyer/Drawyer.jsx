@@ -9,7 +9,7 @@ const Drawyer = ({ searchTerm }) => {
     const { weather } = useWeather(searchTerm)
     // console.log(weather?.sys.country)
     const { data } = useCountry(weather?.sys.country)
-    console.log(data)
+    // console.log(data)
     return (
         <div className="drawer-side is-drawer-close:overflow-visible">
             <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
